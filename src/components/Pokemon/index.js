@@ -15,7 +15,7 @@ class Pokemon extends Component {
     };
   }
 
-
+ 
 
   randomTeams() {
     this.setState({ clicked: true });
@@ -28,13 +28,15 @@ class Pokemon extends Component {
       team1.push(newArr);
     }
     this.setState({ random1team: team1, random2team: team2 });
+    
   }
- 
+ count = 0
  
   render() {
      let team1Point =this.state.random1team.reduce((sum, hero) => sum + hero.base_experience, 0)
      let team2Point =this.state.random2team.reduce((sum, hero) => sum + hero.base_experience, 0)
 
+   
     return (
       <>
         <button
@@ -50,18 +52,18 @@ class Pokemon extends Component {
 
         {this.state.clicked && (
           <>
-            <h3 className="text-center">Team1</h3>
+            <h3 className={`${team1Point>team2Point ? "text-success":"text-danger"} text-center`}>Team1 {team1Point>team2Point ? "Winners" : "Losers"}</h3>
             <p className="text-center">{team1Point}</p>
             {this.state.random1team.map((item, index) => (
               <PokemonItem key={index} item={item}/>
             ))}
-            <h3 className="text-center">Team2</h3>
+            <h3 className={`${team1Point<team2Point ? "text-success" : "text-danger"} mt-5 text-center`}>Team2 {team1Point<team2Point ? "Winners" : "Losers"}</h3>
             <p className="text-center">{team2Point}</p>
             {this.state.random2team.map((item, index) => (
               <PokemonItem key={index} item={item} />
             ))}
 
-                <PokemonResults team = {{team1Point, team2Point}}/>
+            <PokemonResults team = {{team1Point, team2Point}}/>
           </>
         )}
       </>
