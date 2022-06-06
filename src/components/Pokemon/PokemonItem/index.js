@@ -4,7 +4,7 @@ class PokemonItem extends Component {
   
   render() {
    let  item = this.props.item
-   console.log(this.props.item);
+  
     return (
       <div className="col-lg-3">
            <div className={`card ${PokemonStyle.bg_color}`} style={{width: "100%"}}>
